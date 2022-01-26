@@ -1,24 +1,29 @@
-# README
+# LinkedList
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+for lists of links
 
-Things you may want to cover:
+## Getting started
 
-* Ruby version
+To get started with the app, clone the repo and then install the needed gems:
 
-* System dependencies
+```
+$ bundle install
+```
 
-* Configuration
+To migrate the database:
 
-* Database creation
+```
+$ rails db:migrate
+```
 
-* Database initialization
+To run the test suite:
 
-* How to run the test suite
+```
+$ rails test
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+To run the app:
 
-* Deployment instructions
-
-* ...
+```
+$ rails server
+```
