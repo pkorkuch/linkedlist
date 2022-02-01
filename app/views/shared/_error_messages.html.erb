@@ -1,0 +1,14 @@
+<% if @user.errors.any? %>
+  <div id='form-errors' 
+       class='flex border-2 border-red-700 p-3 mt-2 empty:hidden' 
+       role='alert' 
+       aria-live='assertive' 
+       aria-atomic='true'>
+    <%= render 'icons/error' %>
+    <ul class='ml-2'>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

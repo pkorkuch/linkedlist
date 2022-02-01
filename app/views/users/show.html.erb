@@ -1,0 +1,14 @@
+<% provide(:title, @user.name) %>
+<article class='flex items-start'>
+  <%= gravatar_for @user, class: 'mr-2' %>
+  <div>
+    <h2>Profile</h2>
+    <h3 class='text-xl'><%= @user.name %></h3>
+    <dl>
+      <dt class='text-sm'>Email</dt>
+      <dd><%= @user.email %></dd>
+      <dt class='text-sm'>Created</dt>
+      <dd><%= @user.created_at.strftime '%B %e' %></dd>
+    </dl>
+  </div>
+</article>
