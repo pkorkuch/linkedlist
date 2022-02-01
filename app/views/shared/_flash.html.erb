@@ -1,0 +1,13 @@
+<% if flash.any? %>
+  <div id='flash_messages' 
+       class='flex border-2 border-blue-700 p-3 my-2 empty:hidden' 
+       role='alert' 
+       aria-live='assertive' 
+       aria-atomic='true'>
+    <ul>
+      <% flash.each do |message_type, message| %>
+        <li><%= render "icons/#{message_type}" %><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

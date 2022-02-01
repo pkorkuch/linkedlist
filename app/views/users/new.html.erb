@@ -1,5 +1,16 @@
-<% provide(:title, "Sign Up") %>
-<div>
-  <h1 class="font-bold text-4xl">Users#new</h1>
-  <p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, 'Sign Up') %>
+<div class='max-w-md mx-auto'>
+  <h2 class='text-2xl'>Sign Up</h1>
+  <%= render 'shared/error_messages' %>
+  <%= form_with model: @user, class: 'flex flex-col' do |f| %>
+    <%= f.label :name, class: 'mt-2'%>
+    <%= f.text_field :name, class: 'bg-transparent px-3 pt-2 pb-1.5 border-2 border-white', required: true %>
+    <%= f.label :email, class: 'mt-4' %>
+    <%= f.email_field :email, class: 'bg-transparent px-3 pt-2 pb-1.5 border-2 border-white', required: true %>
+    <%= f.label :password, class: 'mt-4' %>
+    <%= f.password_field :password, class: 'bg-transparent px-3 pt-2 pb-1.5 border-2 border-white' , required: true, minLength: 8 %>
+    <%= f.label :password_confirmation, 'Confirm password', class: 'mt-4' %>
+    <%= f.password_field :password_confirmation, class: 'bg-transparent px-3 pt-2 pb-1.5 border-2 border-white', required: true, minLength: 8 %>
+    <%= f.submit 'Create account', class: 'self-end rounded-md mt-4 px-3 pt-2 pb-1.5 cursor-pointer border-2 border-white hover:text-black hover:bg-white focus:text-black focus:bg-white' %>
+  <% end %>
 </div>

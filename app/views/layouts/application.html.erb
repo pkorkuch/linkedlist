@@ -11,9 +11,13 @@
   </head>
   <body class="bg-zinc-500 text-gray-100 min-h-screen flex flex-col justify-center items-center p-5">
     <%= render 'partials/header' %>
-    <main class="grow w-full max-w-lg">
+    <main class="grow w-full max-w-xl">
+      <%= render 'shared/flash' %>
       <%= yield %>
     </main>
     <%= render 'partials/footer' %>
+    <aside class="w-full max-w-xl mt-2 p-2 text-xs border-2 rounded-md overflow-scroll" >
+      <%= debug(params) if Rails.env.development? %>
+    </aside>
   </body>
 </html>
