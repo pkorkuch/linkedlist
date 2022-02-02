@@ -1,6 +1,7 @@
 <% provide(:title, 'Sign Up') %>
 <div class='max-w-md mx-auto'>
   <h2 class='text-2xl'>Sign Up</h1>
+  <% #TODO: switch to using flash for sign up errors %>
   <%= render 'shared/error_messages' %>
   <%= form_with model: @user, class: 'flex flex-col' do |f| %>
     <%= f.label :name, class: 'mt-2'%>

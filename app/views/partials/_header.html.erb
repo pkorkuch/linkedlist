@@ -1,4 +1,4 @@
-<header class="w-full max-w-xl mb-5 flex justify-between">
+<header class="w-full max-w-4xl mb-5 flex justify-between">
   <%= link_to root_path, class: "no-underline" do %>
     <h1>
       <svg xmlns="http://www.w3.org/2000/svg" class="inline relative bottom-[0.2em] h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -8,8 +8,14 @@
     </h1>
   <% end %>
   <nav>
-    <ul>
-      <li><%= link_to "Log In", "#" %></li>
+    <ul class="flex flex-row">
+      <% if logged_in? %>
+        <li><%= link_to "Profile", current_user, class: "ml-2" %></li>
+        <li><%= link_to "Settings", "#", class: "ml-2" %></li>
+        <li><%= link_to "Log Out", logout_path, class: "ml-2" %></li>
+      <% else %>
+        <li><%= link_to "Log In", login_path, method: :delete, class: "ml-2" %></li>
+      <% end %>
     </ul>
   </nav>
 </header>
