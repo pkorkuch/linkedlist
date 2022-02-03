@@ -9,14 +9,14 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="bg-zinc-500 text-gray-100 min-h-screen flex flex-col justify-center items-center p-5">
+  <body class="bg-zinc-500 text-neutral-100 min-h-screen flex flex-col justify-center items-center p-5">
     <%= render 'partials/header' %>
-    <main class="grow w-full max-w-xl">
+    <main class="grow w-full max-w-4xl">
       <%= render 'shared/flash' %>
       <%= yield %>
     </main>
     <%= render 'partials/footer' %>
-    <aside class="w-full max-w-xl mt-2 p-2 text-xs border-2 rounded-md overflow-scroll" >
+    <aside class="w-full max-w-4xl mt-2 p-2 text-xs border-2 rounded-md overflow-scroll" >
       <%= debug(params) if Rails.env.development? %>
     </aside>
   </body>

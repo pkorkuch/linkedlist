@@ -28,5 +28,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div[role="alert"]', count: 1
     assert_select 'div[role="alert"] li', count: 1
     assert_not flash.empty?
+    assert is_logged_in?
   end
 end

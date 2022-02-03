@@ -1,6 +1,8 @@
 <% provide(:title, @user.name) %>
-<article class='flex items-start'>
-  <%= gravatar_for @user, class: 'mr-2' %>
+<article class='flex items-start flex-wrap'>
+  <div class='image-loader w-[80px] h-[80px] mr-2 mb-2 relative shrink-0'>
+    <%= gravatar_for @user, class: 'rounded-md' %>
+  </div>
   <div>
     <h2>Profile</h2>
     <h3 class='text-xl'><%= @user.name %></h3>
