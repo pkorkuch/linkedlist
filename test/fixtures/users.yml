@@ -1,4 +1,0 @@
-existing_user:
-  name: First Last
-  email: flast@example.com
-  password_digest: <%= User.digest('password') %>

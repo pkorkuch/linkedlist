@@ -1,7 +1,5 @@
-require 'test_helper'
-
-class UsersSignupTest < ActionDispatch::IntegrationTest
-  test 'user is not created when signup info is invalid' do
+describe 'Users signup' do
+  it 'does not create a user when signup info is invalid' do
     get signup_path
     assert_no_difference 'User.count' do
       post users_path, params: { user: { name: '',
@@ -14,7 +12,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div[role="alert"] li', count: 4
   end
 
-  test 'user is created when signup info is valid' do
+  it 'creates a user when signup info is valid' do
     new_user = { name: 'First Last',
                  email: 'test@example.com',
                  password: 'password',
