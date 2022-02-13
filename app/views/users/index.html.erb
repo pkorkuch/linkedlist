@@ -1,0 +1,31 @@
+<% provide(:title, 'Users') %>
+<h2 class='font-serif font-bold text-2xl mb-2'>Users</h2>
+<turbo-frame id='users-list' data-turbo-action='advance'>
+  <% if @users.any? %>
+    <small>Page <%= @current_page %> of <%= @total_pages %></small>
+    <% if @total_pages > 1%>
+      <nav class='mb-2', aria-label='User pages'>
+        <% @total_pages.times do |index| %>
+          <% page = index + 1 %>
+          <%= link_to "#{page}", users_path(page: page), rel: 'next', 'aria-current': page == @current_page ? 'page' : nil,class: "#{page == @current_page ? 'bg-yellow-400 text-neutral-800 border-yellow-400': 'text-neutral-300 border-neutral-300'} no-underline inline-block leading-none mb-2 px-1 pt-1.5 pb-0.5 min-w-[1.5em] text-center rounded-md border hover:underline focus:underline" %>
+        <% end %>
+      </nav>
+    <% end %>
+    <% @users.each do |user| %>
+      <article class='flex mb-4 last:mb-0 items-center'>
+        <%= gravatar_for user, size: 50, class: 'mr-2 w-[50px] h-[50px] min-w-[50px] rounded-md bg-neutral-100/75 border-2 border-neutral-100/75 shadow' %>
+        <section class='grow'>
+          <%= link_to user, data: { 'turbo-frame': '_top' } do %>
+            <h3><%= user.name %></h3>
+          <% end %>
+          <small class='text-neutral-300'>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
+        </section>
+        <% if current_user.admin? && !current_user?(user) %>
+          <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Confirm delete?' }, class: 'justify-self-end self-end border text-sm no-underline rounded-md leading-none p-1 pt-1.5 border-red-300 text-red-300' %>
+        <% end %>
+      </article>
+    <% end %>
+  <% else %>
+    <p>No users found.</p>
+  <% end %>
+</turbo-frame>

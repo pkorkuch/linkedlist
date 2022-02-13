@@ -6,7 +6,7 @@ class User < ApplicationRecord
   # email confirmation will actually confirm the email is correct
   validates :email, format: { with: /.+@.+/i }
 
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
   has_secure_password
   attr_accessor :remember_token

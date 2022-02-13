@@ -1,0 +1,26 @@
+<% provide(:title, 'Edit Profile') %>
+<div class='Form'>
+  <h2>Edit Profile</h1>
+  <div class='flex mt-2'>
+    <div class='image-loader w-[80px] h-[80px] mb-2 relative shrink-0'>
+      <%= gravatar_for @user, class: 'rounded-md' %>
+    </div>
+    <a href='https://gravatar.com/emails' target='_blank' rel='noopener' class='block relative drop-shadow translate-x-[-50%] self-end rounded-sm no-underline bg-neutral-300/50 hover:bg-neutral-100 focus:bg-neutral-100 transition-colors text-sm text-neutral-800 pl-1 pr-0.5 pt-0.5 pb-1' aria-label='Change Gravatar'>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </div>
+  <%= form_with model: @user do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation, 'Confirm password' %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit 'Save Changes' %>
+  <% end %>
+</div>
