@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['"Josefin Sans"', ...defaultTheme.fontFamily.sans],
-        serif: ['"Cormorant Infant"', ...defaultTheme.fontFamily.serif]
+        serif: ['"Gentium Basic"', ...defaultTheme.fontFamily.serif]
       },
     },
   },
