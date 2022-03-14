@@ -1,9 +1,14 @@
-<footer class="w-full max-w-4xl mt-5 text-sm text-neutral-300">
-  <ul class="flex justify-between">
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "About", about_path %></li>
-    <li><%= link_to "Contact", contact_path %></li>
-    <li><%= link_to "Help", help_path %></li>
-    <li><%= link_to "Sign Up", signup_path %></li>
-  </ul>
+<footer class="w-full mt-10 text-sm text-neutral-300 before:absolute before:w-full before:left-0 before:border-t before:border-t-zinc-600">
+  <div class="mx-auto p-5">
+    <ul class="flex flex-wrap gap-2">
+      <li><%= link_to "Home", root_path, class: "no-underline hover:underline focus:underline" %></li>
+      <li><%= link_to "About", about_path, class: "no-underline hover:underline focus:underline" %></li>
+      <li><%= link_to "Contact", contact_path, class: "no-underline hover:underline focus:underline" %></li>
+      <li><%= link_to "Help", help_path, class: "no-underline hover:underline focus:underline" %></li>
+      <li><%= link_to "Sign Up", signup_path, class: "no-underline hover:underline focus:underline" %></li>
+    </ul>
+    <div class="w-full mt-2 p-2 text-xs border rounded-md overflow-scroll" >
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </div>
 </footer>

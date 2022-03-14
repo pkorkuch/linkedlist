@@ -13,8 +13,8 @@
   </head>
   <body class="bg-zinc-700 text-neutral-100 min-h-screen">
     <a href='#main-content' class='bg-neutral-100 text-neutral-800 px-2 absolute -top-8 focus:top-0 transition-all focus:transition-none delay-500 focus:delay-[0ms] rounded-b'>Skip to main content</a>
-    <div class='w-full max-w-4xl min-h-screen mx-auto flex flex-col justify-center items-center'>
-      <%= render 'partials/header' %>
+    <div class='w-full min-h-screen mx-auto max-w-[55ch] flex flex-col justify-center items-center'>
+      <%= render 'partials/header_minimal' %>
       <main id='main-content' class="grow w-full px-5 focus:outline-none focus-visible:outine">
         <%= render 'shared/flash' %>
         <%= yield %>
