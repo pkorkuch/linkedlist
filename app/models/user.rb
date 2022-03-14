@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_secure_password
   attr_accessor :remember_token
 
+  has_many :link_posts, dependent: :destroy
+  has_many :bookmarks
+  has_many :bookmarked_link_posts, through: :bookmarks, source: :link_post
+
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))

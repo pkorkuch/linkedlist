@@ -1,0 +1,23 @@
+<% provide(:title, 'New Post') %>
+<div class='Form' data-controller='new-link-post'>
+  <h2 class='form-header'>New Post</h2>
+  <% #TODO: switch to using flash for sign up errors %>
+  <%= render 'shared/error_messages' %>
+  <%= form_with model: @link_post, url: user_link_posts_path, class: 'flex flex-col' do |f| %>
+    <%= f.label :link_text, 'Title', class: 'form-label' do %>
+      Title <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.text_field :link_text, required: true, maxLength: 75, data: { new_link_post_target: 'title', action: 'new-link-post#updateTitle' }, class: 'form-input' %>
+    <div class='ml-auto font-light text-sm mt-1' aria-live='polite' aria-atomic='true'><span data-new-link-post-target='titleLength'>0</span>/75</div>
+    <%= f.label :content, class: 'form-label -mt-1' do %>
+      Body <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.text_area :content, required: true, maxLength: 500, data: { new_link_post_target: 'content', action: 'new-link-post#updateContent' }, class: 'form-input' %>
+    <div class='ml-auto font-light text-sm mt-1'><span data-new-link-post-target='contentLength'>0</span>/500</div>
+    <%= f.label :link, class: 'form-label -mt-1' do %>
+      Link <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.url_field :link, required: true, class: 'form-input' %>
+    <%= f.submit 'Create Post', class: 'form-submit' %>
+  <% end %>
+</div>

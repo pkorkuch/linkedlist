@@ -1,0 +1,37 @@
+<article class='ml-5 mb-8 last-of-type:mb-0' data-controller='post' data-post-id-value=<%= link_post.id %>>
+  <h3 class='relative font-serif text-xl leading-tight mb-2 text-neutral-200'>
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="text-yellow-400 absolute h-5 w-5 top-1 -left-6" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+    </svg>
+    <%= link_to link_post.link_text, link_post.link, class: 'hover:text-yellow-400 focus:text-yellow-400' %>
+  </h3>
+  <p><%= link_post.content %></p>
+  <footer class='font-light text-sm text-neutral-300 mt-2 flex justify-between'>
+    <p>
+      Posted <time datetime='<%= link_post.created_at.iso8601 %>' class='text-neutral-100'><%= link_post.created_at.strftime('%B %-d, %Y') %></time> by <span class='text-neutral-100'><%= link_post.user.name %></span>
+      <span aria-hidden='true'> • </span>
+      <%= link_to 'Permalink', link_post, 'aria-label': "Permalink to #{link_post.link_text}", class: 'ml-auto font-serif font-normal italic text-neutral-100 no-underline hover:underline focus:underline' %>
+    </p>
+    <% if logged_in? %>
+      <% if current_user.bookmarked_link_posts.include?(link_post) %>
+        <%= button_to bookmark_path(current_user.bookmarks.find_by(link_post_id: link_post.id)), method: :delete, class: 'stroke-red-700 fill-red-700 focus:stroke-neutral-200 focus:fill-transparent hover:stroke-neutral-200 hover:fill-transparent', title: 'Remove bookmark' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="h-5 w-5 stroke-1" viewBox="0 0 20 20">
+            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+          </svg>
+        <% end %>
+      <% else %>
+        <%= button_to bookmarks_path(params: { post_id: link_post.id }), method: :post, class: 'stroke-neutral-200 fill-transparent focus:stroke-red-700 focus:fill-red-700 hover:stroke-red-700 hover:fill-red-700', title: 'Bookmark post' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="h-5 w-5 stroke-1" viewBox="0 0 20 20">
+            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+          </svg>
+        <% end %>
+      <% end %>
+      <!-- <button data-post-target='bookmarkButton' data-post-action='post#toggleBookmark' aria-label='Bookmark post' aria-pressed='false' class='ml-auto'>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-1 stroke-neutral-200 fill-transparent hover:stroke-red-700 hover:fill-red-700" viewBox="0 0 20 20">
+          <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+        </svg>
+      </button> -->
+    <% end %>
+  </footer>
+</article>

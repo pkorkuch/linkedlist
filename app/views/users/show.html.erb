@@ -1,16 +1,55 @@
 <% provide(:title, @user.name) %>
-<article class='flex items-start flex-wrap'>
-  <div class='image-loader w-[80px] h-[80px] mr-2 mb-2 relative shrink-0'>
-    <%= gravatar_for @user, class: 'rounded-md' %>
+<article>
+  <div class='absolute -z-50 left-0 w-full h-20 bg-topography border-zinc-800/50 border-t border-b shadow-inner'></div>
+  <div class='flex flex-row items-end mb-4 sm:mb-8 pt-8'>
+    <div class='image-loader w-[80px] h-[80px] mr-2 block relative'>
+      <%= gravatar_for @user, class: 'rounded-md shadow-md' %>
+    </div>
+    <div>
+      <h2 class='text-xl leading-none'><%= @user.name %></h2>
+      <p class='text-sm font-light font-serif text-neutral-300'><span class=''>Joined </span><%= @user.created_at.strftime '%B %e' %></p>
+    </div>
   </div>
-  <div>
-    <h2>Profile</h2>
-    <h3 class='text-xl'><%= @user.name %></h3>
-    <dl>
-      <dt class='text-sm'>Email</dt>
-      <dd><%= @user.email %></dd>
-      <dt class='text-sm'>Created</dt>
-      <dd><%= @user.created_at.strftime '%B %e' %></dd>
-    </dl>
+  <div class='flex items-start justify-between flex-wrap w-full border-b border-neutral-500 sm:border-none sm:min-w-40 sm:max-w-56 pb-4 sm:pb-0 mb-0 sm:mb-4 break-all'>
+    <div class='mr-0 sm:mr-4 mb-8'>
+      <%= render 'shared/follow_button' %>
+      <nav class='mt-4' aria-label='Profile navigation'>
+        <ul class='flex flex-row sm:flex-col flex-wrap'>
+          <li class='mb-2'>
+            <%= link_to user_path(@user), class: 'flex items-center no-underline text-purple-300 hover:bg-purple-100/25 hover:text-neutral-100 rounded-md pl-1 pr-2 relative -left-1 transition-all motion-reduce:transition-none' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden='true' focusable='false' class="inline h-6 w-6 mr-1 stroke-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span class='pt-1'>Posts</span>
+            <% end %>
+          </li>
+          <li class='mb-2'>
+            <%= link_to user_bookmarks_path(@user), class: 'flex items-center no-underline text-purple-300 hover:bg-purple-100/25 hover:text-neutral-100 rounded-md pl-1 pr-2 relative -left-1 transition-all motion-reduce:transition-none' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden='true' focusable='false' class="inline h-6 w-6 mr-1 stroke-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class='pt-1'>Bookmarks</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to edit_user_path(@user), class: 'flex items-center no-underline text-purple-300 hover:bg-purple-100/25 hover:text-neutral-100 rounded-md pl-1 pr-2 relative -left-1 transition-all motion-reduce:transition-none' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden='true' focusable='false' class="inline h-6 w-6 mr-1 stroke-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class='pt-1'>Settings</span>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class='max-w-prose shrink'>
+      <% if @user.link_posts.any? %>
+        <% count = @user.link_posts.count %>
+        <%= render partial: 'link_posts/link_post_preview', collection: @user.link_posts.newest_to_oldest, as: :link_post %>
+      <% else %>
+        <h2>No posts from this user.</h2>
+      <% end %>
+    </div>
   </div>
 </article>

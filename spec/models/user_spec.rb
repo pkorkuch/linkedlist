@@ -18,6 +18,8 @@ describe User do
     it { should_not allow_value('emailexamplecom').for(:email) }
     it { should_not allow_value('@e').for(:email) }
     it { should_not allow_value('l@').for(:email) }
+    it { should have_many(:link_posts).dependent(:destroy) }
+    it { should have_many(:bookmarked_link_posts).through(:bookmarks) }
   end
 
   context '#remember_token' do

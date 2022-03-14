@@ -1,0 +1,26 @@
+<% provide(:title, @user.name) %>
+<div class='absolute left-0 w-full h-20 bg-topography border-zinc-800/50 border-t border-b shadow-inner'></div>
+<article class='flex items-start flex-wrap sm:flex-nowrap mt-8'>
+  <section class='w-full border-b border-neutral-500 sm:border-none sm:w-40 sm:max-w-xs sm:grow pb-4 sm:pb-0 sm:pr-4 sm:mr-2 mb-0 sm:mb-4 break-all'>
+    <div class='image-loader w-[80px] h-[80px] mr-2 mb-2 block relative'>
+      <%= gravatar_for @user, class: 'rounded-md shadow-md' %>
+    </div>
+    <h2>Profile</h2>
+    <h3 class='text-xl'><%= @user.name %></h3>
+    <dl>
+      <dt class='text-sm'>Email</dt>
+      <dd><%= @user.email %></dd>
+      <dt class='text-sm'>Created</dt>
+      <dd><%= @user.created_at.strftime '%B %e' %></dd>
+    </dl>
+  </section>
+  <section class='w-full max-w-prose shrink mt-4 sm:mt-20'>
+    <% if @user.bookmarks.any? %>
+      <% count = @user.bookmarks.count %>
+      <h2 class='font-serif italic text-neutral-300 text-lg mb-4 text-left sm:text-right'><%= pluralize(count, 'Bookmarked Post') %></h2>
+      <%= render partial: 'link_posts/link_post_preview', collection: @user.bookmarked_link_posts.newest_to_oldest, as: :link_post %>
+    <% else %>
+      <h2 class='font-serif italic text-neutral-300 text-lg mb-4 text-left sm:text-right'>No bookmarks from this user.</h2>
+    <% end %>
+  </section>
+</article>
