@@ -1,14 +1,15 @@
 <% #TODO: add ability to render multiple messages of same type %>
 <% if flash.any? %>
   <div id='flash_messages' 
-       class='bg-neutral-300 text-neutral-800 drop-shadow-md px-3 pt-3 pb-1 mb-4 empty:hidden' 
+       class='border border-l-4 text-neutral-300 drop-shadow-md px-2 pt-2 pb-1 mb-4 mx-auto empty:hidden' 
        role='alert' 
+       aria-label='Messages'
        aria-live='assertive' 
        aria-atomic='true'>
     <% flash.each do |message_type, message| %>
-      <section class='flex mb-2'>
+      <section class='flex mb-2 last-of-type:mb-0'>
         <%= render "icons/#{message_type}" %>
-        <ul>
+        <ul class='ml-1'>
           <% if message.is_a? Array %>
             <% message.each do |m| %>
               <li><%= m %></li>
