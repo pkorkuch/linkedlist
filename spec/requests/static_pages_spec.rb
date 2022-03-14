@@ -3,10 +3,20 @@ describe 'static pages' do
     @base_title = 'LinkedList'
   end
 
-  it 'should get home' do
-    get root_path
-    assert_response :success
-    assert_select 'title', @base_title
+  context 'logged in' do
+    it 'redirects root to profile of current user' do
+      user = create(:user)
+      log_in_as user
+      get root_path
+      assert_redirected_to user_url(user)
+    end
+  end
+
+  context 'not logged in' do
+    it 'redirects root to login page' do
+      get root_path
+      assert_redirected_to login_url
+    end
   end
 
   it 'should get about' do

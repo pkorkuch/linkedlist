@@ -31,6 +31,8 @@ describe 'Users management' do
     assert_not flash.empty?
     assert_redirected_to root_url
     follow_redirect!
+    assert_redirected_to user_url(other_user)
+    follow_redirect!
     assert_select 'div[role="alert"]', count: 1
     assert_select 'div[role="alert"] li', count: 1
   end
@@ -54,6 +56,8 @@ describe 'Users management' do
                                              email: user.email } }
     assert_not flash.empty?
     assert_redirected_to root_url
+    follow_redirect!
+    assert_redirected_to user_url(other_user)
     follow_redirect!
     assert_select 'div[role="alert"]', count: 1
     assert_select 'div[role="alert"] li', count: 1
