@@ -1,17 +1,25 @@
 <% provide(:title, 'Sign Up') %>
 <div class='Form'>
-  <h2>Sign Up</h2>
+  <h2 class='form-header'>Sign Up</h2>
   <% #TODO: switch to using flash for sign up errors %>
   <%= render 'shared/error_messages' %>
-  <%= form_with model: @user do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name, required: true %>
-    <%= f.label :email %>
-    <%= f.email_field :email, required: true %>
-    <%= f.label :password %>
-    <%= f.password_field :password, required: true, minLength: 8 %>
-    <%= f.label :password_confirmation, 'Confirm password' %>
-    <%= f.password_field :password_confirmation, required: true, minLength: 8 %>
-    <%= f.submit 'Create account' %>
+  <%= form_with model: @user, class: 'flex flex-col' do |f| %>
+    <%= f.label :name, class: 'form-label' do %>
+      Name <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.text_field :name, required: true, class: 'form-input' %>
+    <%= f.label :email, class: 'form-label' do %>
+      Email <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.email_field :email, required: true, class: 'form-input' %>
+    <%= f.label :password, class: 'form-label' do %>
+      Password <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.password_field :password, required: true, minLength: 8, class: 'form-input' %>
+    <%= f.label :password_confirmation, class: 'form-label' do %>
+      Confirm password <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.password_field :password_confirmation, required: true, minLength: 8, class: 'form-input' %>
+    <%= f.submit 'Create account', class: 'form-submit' %>
   <% end %>
 </div>

@@ -1,17 +1,21 @@
 <% provide(:title, 'Log In') %>
 <div class='Form'>
-  <h2>Log In</h1>
-  <%= form_with url: login_path, scope: :session do |f| %>
+  <h2 class='form-header'>Log In</h2>
+  <%= form_with url: login_path, scope: :session, class: 'flex flex-col' do |f| %>
     <% #TODO: adjust focus styling to better match app colors %>
-    <%= f.label :email %>
-    <%= f.email_field :email, required: true %>
-    <%= f.label :password %>
-    <%= f.password_field :password, required: true, minLength: 8 %>
-    <%= f.label :remember_me do %>
+    <%= f.label :email, class: 'form-label' do %>
+      Email <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.email_field :email, required: true, class: 'form-input' %>
+    <%= f.label :password, class: 'form-label' do %>
+      Password <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.password_field :password, required: true, minLength: 8, class: 'form-input' %>
+    <%= f.label :remember_me, class: 'form-label' do %>
       <%= f.check_box :remember_me, class: 'align-sub text-blue-500 focus:ring-offset-neutral-500' %>
       <span class='text-sm text-neutral-200'>Remember me</span>
     <% end %>
-    <%= f.submit 'Log In' %>
+    <%= f.submit 'Log In', class: 'form-submit' %>
   <% end %>
   <p class='mt-2 text-right text-sm text-neutral-200'>Or <%= link_to 'create an account', signup_path %></p>
 </div>

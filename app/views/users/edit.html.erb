@@ -1,6 +1,6 @@
 <% provide(:title, 'Edit Profile') %>
 <div class='Form'>
-  <h2>Edit Profile</h1>
+  <h2 class='form-header'>Edit Profile</h2>
   <div class='flex mt-2'>
     <div class='image-loader w-[80px] h-[80px] mb-2 relative shrink-0'>
       <%= gravatar_for @user, class: 'rounded-md' %>
@@ -12,15 +12,19 @@
       </svg>
     </a>
   </div>
-  <%= form_with model: @user do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name, required: true %>
-    <%= f.label :email %>
-    <%= f.email_field :email, required: true %>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <%= f.label :password_confirmation, 'Confirm password' %>
-    <%= f.password_field :password_confirmation %>
-    <%= f.submit 'Save Changes' %>
+  <%= form_with model: @user, class: 'flex flex-col' do |f| %>
+    <%= f.label :name, class: 'form-label' do %>
+      Name <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.text_field :name, required: true, class: 'form-input' %>
+    <%= f.label :email, class: 'form-label' do %>
+      Email <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
+    <% end %>
+    <%= f.email_field :email, required: true, class: 'form-input' %>
+    <%= f.label :password, class: 'form-label' %>
+    <%= f.password_field :password, class: 'form-input' %>
+    <%= f.label :password_confirmation, 'Confirm password', class: 'form-label' %>
+    <%= f.password_field :password_confirmation, class: 'form-input' %>
+    <%= f.submit 'Save Changes', class: 'form-submit' %>
   <% end %>
 </div>
