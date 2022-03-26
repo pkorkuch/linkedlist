@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :admin do
       admin { true }
     end
+
+    trait :activated do
+      activated_at { created_at + Random.new.rand(1..1000).minutes }
+    end
   end
 end
