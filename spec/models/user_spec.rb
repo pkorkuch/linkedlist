@@ -37,6 +37,79 @@ describe User do
     end
   end
 
+  context '#activation_token' do
+    it 'returns a new token' do
+      user = create(:user)
+      expect(user.activation_token).to_not be_nil
+    end
+  end
+
+  context '#activated?' do
+    it 'is false when the user is first created' do
+      user = create(:user)
+      expect(user.activated?).to be false
+    end
+  end
+
+  context '.activate' do
+    it 'activates the user' do
+      user = create(:user)
+      User.activate(user.activation_token)
+      user.reload
+      expect(user.activated?).to eq true
+    end
+
+    it 'only activates the user that the token belongs to' do
+      user = create(:user)
+      second_user = create(:user)
+      third_user = create(:user)
+
+      User.activate(second_user.activation_token)
+
+      user.reload
+      second_user.reload
+      third_user.reload
+
+      expect(second_user.activated?).to be true
+      expect(user.activated?).to be false
+      expect(third_user.activated?).to be false
+    end
+
+    it 'returns the user on successful activation' do
+      user = create(:user)
+      expect(User.activate(user.activation_token)).to eq user
+    end
+
+    it 'returns nil if the token is missing' do
+      expect(User.activate(nil)).to be_nil
+    end
+
+    it 'does not activate the user if the token is missing' do
+      user = create(:user)
+      User.activate(nil)
+      user.reload
+      expect(user.activated?).to be false
+    end
+
+    it 'returns nil if the token is expired' do
+      user = create(:user)
+      freeze_time
+      token = user.activation_token
+      travel_to 10.minutes.from_now
+      expect(User.activate(token)).to be_nil
+    end
+
+    it 'does not activate the user if the token is expired' do
+      user = create(:user)
+      freeze_time
+      token = user.activation_token
+      travel_to 10.minutes.from_now
+      User.activate(token)
+      user.reload
+      expect(user.activated?).to be false
+    end
+  end
+
   context '#authenticated?' do
     it 'is false when passed a nil remember token' do
       user = create(:user)
