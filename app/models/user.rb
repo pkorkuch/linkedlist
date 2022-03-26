@@ -37,13 +37,13 @@ class User < ApplicationRecord
   end
 
   def activation_token
-    to_signed_global_id
+    to_signed_global_id(expires_in: 5.minutes, for: 'account_activation')
   end
 
   def activate(activation_token)
     return self unless activated_at.nil?
 
-    user = GlobalID::Locator.locate_signed(activation_token)
+    user = GlobalID::Locator.locate_signed(activation_token, for: 'account_activation')
 
     return nil if user.nil?
     return nil unless user.is_a?(User)
@@ -55,7 +55,7 @@ class User < ApplicationRecord
   end
 
   def self.activate(activation_token)
-    user = GlobalID::Locator.locate_signed(activation_token)
+    user = GlobalID::Locator.locate_signed(activation_token, for: 'account_activation')
     return nil if user.nil?
     return nil unless user.is_a?(User)
 

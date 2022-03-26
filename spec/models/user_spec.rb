@@ -108,6 +108,43 @@ describe User do
       user.reload
       expect(user.activated?).to be false
     end
+
+    it 'returns nil if the token is for the wrong purpose' do
+      user = create(:user)
+      token = user.to_signed_global_id(for: 'login')
+      expect(User.activate(token)).to be_nil
+    end
+
+    it 'does not activate the user if the token is for the wrong purpose' do
+      user = create(:user)
+      token = user.to_signed_global_id(for: 'login')
+      User.activate(token)
+      user.reload
+      expect(user.activated?).to be false
+    end
+
+    it 'returns nil if the token does not have an explicit purpose' do
+      user = create(:user)
+      token = user.to_signed_global_id
+      expect(User.activate(token)).to be_nil
+    end
+
+    it 'does not activate the user if the token does not have an explicit purpose' do
+      user = create(:user)
+      token = user.to_signed_global_id
+      User.activate(token)
+      user.reload
+      expect(user.activated?).to be false
+    end
+
+    it 'does not have an effect if the user is alrady activated' do
+      user = create(:user, :activated)
+      original_activated_at = user.activated_at
+      User.activate(user.activation_token)
+      user.reload
+      expect(user.activated?).to be true
+      expect(user.activated_at).to eq original_activated_at
+    end
   end
 
   context '#authenticated?' do
