@@ -18,6 +18,10 @@ gem 'tailwindcss-rails', '~> 2.0.5'
 gem 'turbo-rails', '~> 1.0.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+group :production do
+  gem 'aws-sdk-rails', '~> 3.6.1'
+end
+
 group :development, :test do
   gem 'debug', '~> 1.4.0', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2.0'
@@ -27,6 +31,7 @@ end
 
 group :development do
   gem 'htmlbeautifier', '~> 1.4.1'
+  gem 'letter_opener', '~> 1.8.0'
   gem 'rubocop', '~> 1.25.0'
   gem 'solargraph', '~> 0.44.3'
   gem 'web-console', '~> 4.2.0'
