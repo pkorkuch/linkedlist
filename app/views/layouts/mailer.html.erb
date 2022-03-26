@@ -2,11 +2,33 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gentium+Basic&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
     <style>
-      /* Email styles need to be inline */
+      html {
+        background-color: #3F3F46;
+        color: #F5F5F5;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+      }
+      h1 {
+        font-family: 'Gentium Basic', serif;
+        margin: 0;
+      }
+      p {
+        margin-top: 16px;
+        margin-right: 0;
+        margin-bottom: 16px;
+        margin-left: 0;
+      }
+      a {
+        color: #FDE047;
+        margin: 0;
+      }
     </style>
   </head>
-
   <body>
     <%= yield %>
   </body>
