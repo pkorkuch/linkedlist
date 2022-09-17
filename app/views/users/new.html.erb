@@ -1,9 +1,17 @@
 <% provide(:title, 'Sign Up') %>
 <div class='Form'>
+  <script>
+    function onSubmit(token) {
+      const form = document.getElementById('signup-form');
+      if (form.reportValidity()) {
+        form.submit();
+      }
+    }
+  </script>
   <h2 class='form-header'>Sign Up</h2>
   <% #TODO: switch to using flash for sign up errors %>
   <%= render 'shared/error_messages' %>
-  <%= form_with model: @user, class: 'flex flex-col' do |f| %>
+  <%= form_with model: @user, class: 'flex flex-col', id: 'signup-form' do |f| %>
     <%= f.label :name, class: 'form-label' do %>
       Name <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
     <% end %>
@@ -20,6 +28,7 @@
       Confirm password <span class='text-sm font-serif font-light italic text-neutral-300'>Required</span>
     <% end %>
     <%= f.password_field :password_confirmation, required: true, minLength: 8, class: 'form-input' %>
-    <%= f.submit 'Create account', class: 'form-submit' %>
+    <%= f.button 'Create account', class: 'form-submit g-recaptcha', data: { sitekey: Rails.application.credentials.recaptcha.site_key, callback: 'onSubmit', action: 'signup' } %>
   <% end %>
+  <p class='leading-none text-neutral-300 mt-8'><small>This site is protected by reCAPTCHA and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a> and <a href="https://policies.google.com/terms">Google Terms of Service</a> apply.</small></p>
 </div>

@@ -3,12 +3,16 @@
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <% if @turbo_reload %>
+      <meta name="turbo-visit-control" content="reload">
+    <% end %>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon.png">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <%= javascript_importmap_tags %>
   </head>
   <body class="bg-zinc-700 text-neutral-100 min-h-screen">

@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
-  def new; end
+  before_action :check_recaptcha, only: :create
+
+  def new
+    @turbo_reload = true
+  end
 
   def create
     user = User.find_by(email: params[:session][:email])
@@ -21,5 +25,11 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in?
     redirect_to root_url, status: :see_other
+  end
+
+  private
+
+  def check_recaptcha
+    GRecaptcha::ApiClient.verify_response(params['g-recaptcha-response'])
   end
 end

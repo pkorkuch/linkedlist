@@ -60,3 +60,7 @@
     background-image: url('/topography.svg');
   }
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
