@@ -35,9 +35,9 @@ if Rails.env.development?
 
   User.all.each do |user|
     random.rand(0..20).times do
-      user.link_post.create!(link_text: Faker::Lorem.paragraph_by_chars(number: random.rand(25..75)),
-                             content: Faker::Lorem.paragraph_by_chars(number: random.rand(50..500)),
-                             link: Faker::Internet.url)
+      user.link_posts.create!(link_text: Faker::Lorem.paragraph_by_chars(number: random.rand(25..75)),
+                              content: Faker::Lorem.paragraph_by_chars(number: random.rand(50..500)),
+                              link: Faker::Internet.url)
     end
   end
 end
