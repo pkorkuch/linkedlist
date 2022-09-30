@@ -19,7 +19,6 @@ gem 'turbo-rails', '~> 1.0.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :production do
-  gem 'aws-sdk-rails', '~> 3.6.1'
 end
 
 group :development, :test do
