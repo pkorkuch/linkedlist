@@ -1,6 +1,7 @@
 class UserMailer < ApplicationMailer
-  def account_activation(user)
-    @user = user
-    mail to: user.email, subject: 'Activate your LinkedList account.'
+  default from: email_address_with_name('noreply@linkedlist.korkuch.dev', 'linkedList')
+  def account_activation
+    @user = params[:user]
+    mail to: @user.email, subject: 'Activate your linkedList account.'
   end
 end
