@@ -95,7 +95,7 @@ describe User do
       user = create(:user)
       freeze_time
       token = user.activation_token
-      travel_to 10.minutes.from_now
+      travel_to 24.hours.from_now + 1
       expect(User.activate(token)).to be_nil
     end
 
@@ -103,10 +103,20 @@ describe User do
       user = create(:user)
       freeze_time
       token = user.activation_token
-      travel_to 10.minutes.from_now
+      travel_to 24.hours.from_now + 1
       User.activate(token)
       user.reload
       expect(user.activated?).to be false
+    end
+
+    it 'activates the user for at least 24 hours after the token is created' do
+      user = create(:user)
+      freeze_time
+      token = user.activation_token
+      travel_to 24.hours.from_now
+      User.activate(token)
+      user.reload
+      expect(user.activated?).to be true
     end
 
     it 'returns nil if the token is for the wrong purpose' do

@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def activation_token
-    to_signed_global_id(expires_in: 5.minutes, for: 'account_activation')
+    to_signed_global_id(expires_in: 24.hours, for: 'account_activation')
   end
 
   def activate(activation_token)
