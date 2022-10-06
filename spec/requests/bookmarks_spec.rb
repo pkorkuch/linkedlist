@@ -21,7 +21,7 @@ describe 'Bookmarks' do
 
   context 'logged in' do
     it 'creates a new bookmark for the current user' do
-      user = create(:user)
+      user = create(:user, :activated)
       link_post = create(:link_post)
       log_in_as user
 

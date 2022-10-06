@@ -25,16 +25,16 @@ describe 'LinkPosts' do
 
     context 'logged in with different user' do
       it 'redirects new post to root' do
-        user = create(:user)
-        other_user = create(:user)
+        user = create(:user, :activated)
+        other_user = create(:user, :activated)
         log_in_as(user)
         get new_user_link_post_path(other_user)
         assert_redirected_to root_url
       end
 
       it 'does not allow creation' do
-        user = create(:user)
-        other_user = create(:user)
+        user = create(:user, :activated)
+        other_user = create(:user, :activated)
         log_in_as(user)
         assert_no_difference 'LinkPost.count' do
           post user_link_posts_path(other_user),
@@ -57,7 +57,7 @@ describe 'LinkPosts' do
 
       context 'using valid data' do
         it 'creates new post' do
-          user = create(:user)
+          user = create(:user, :activated)
           post = build(:link_post)
           log_in_as(user)
           assert_difference 'LinkPost.count', 1 do

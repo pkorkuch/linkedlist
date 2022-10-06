@@ -1,6 +1,6 @@
 describe 'Site layout' do
   it 'shows all layout links' do
-    user = create(:user)
+    user = create(:user, :activated)
     get root_path
     follow_redirect!
     assert_select 'a[href=?]', root_path, count: 2

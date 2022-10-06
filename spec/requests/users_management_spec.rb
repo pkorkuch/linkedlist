@@ -24,8 +24,8 @@ describe 'Users management' do
   end
 
   it 'should redirect edit when logged in as wrong user' do
-    user = create(:user)
-    other_user = create(:user)
+    user = create(:user, :activated)
+    other_user = create(:user, :activated)
     log_in_as(other_user)
     get edit_user_path(user)
     assert_not flash.empty?
@@ -49,8 +49,8 @@ describe 'Users management' do
   end
 
   it 'should redirect update when logged as wrong user' do
-    user = create(:user)
-    other_user = create(:user)
+    user = create(:user, :activated)
+    other_user = create(:user, :activated)
     log_in_as(other_user)
     patch user_path(user), params: { user: { name: user.name,
                                              email: user.email } }
@@ -82,7 +82,7 @@ describe 'Users management' do
   end
 
   it 'should redirect destroy when logged in as a non-admin' do
-    user = create(:user)
+    user = create(:user, :activated)
     log_in_as user
     assert_no_difference 'User.count' do
       delete user_path(user)
@@ -91,8 +91,8 @@ describe 'Users management' do
   end
 
   it 'should destroy user when logged in as an admin' do
-    user = create(:user)
-    admin = create(:user, :admin)
+    user = create(:user, :activated)
+    admin = create(:user, :activated, :admin)
     log_in_as admin
     assert_difference 'User.count', -1 do
       delete user_path(user)

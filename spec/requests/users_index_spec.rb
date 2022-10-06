@@ -1,8 +1,8 @@
 describe 'Users index' do
   it 'lists users with pagination' do
-    user = create(:user)
+    user = create(:user, :activated)
     31.times do
-      create(:user)
+      create(:user, :activated)
     end
     log_in_as user
     get users_path

@@ -1,7 +1,7 @@
 describe 'Users editing' do
   context 'edit with invalid values' do
     it 'does not modify user' do
-      user = create(:user)
+      user = create(:user, :activated)
       log_in_as user
       get edit_user_path(user)
       assert_select 'form', count: 1
@@ -20,7 +20,7 @@ describe 'Users editing' do
 
   context 'edit with valid values' do
     it 'modifies user' do
-      user = create(:user)
+      user = create(:user, :activated)
       log_in_as user
       get edit_user_path(user)
       assert_select 'form', count: 1
@@ -46,7 +46,7 @@ describe 'Users editing' do
 
   context 'friendly forwarding' do
     it 'forwards after login to user edit page' do
-      user = create(:user)
+      user = create(:user, :activated)
       get edit_user_path(user)
       log_in_as user
       assert_redirected_to edit_user_path(user)
@@ -72,7 +72,7 @@ describe 'Users editing' do
     end
 
     it 'only forwards once' do
-      user = create(:user)
+      user = create(:user, :activated)
 
       # Try to edit user, log in, and then log in again
       get edit_user_path(user)

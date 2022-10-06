@@ -34,7 +34,7 @@ describe 'Users login' do
 
   context 'login with valid credentials' do
     it 'logs in and logs out correctly' do
-      user = create(:user)
+      user = create(:user, :activated)
       get login_path
       post login_path, params: { session: { email: user.email,
                                             password: 'password' } }
@@ -55,7 +55,7 @@ describe 'Users login' do
 
   context 'login with remembering' do
     it 'sets remember token cookie' do
-      user = create(:user)
+      user = create(:user, :activated)
       log_in_as user, remember_me: '1'
       expect(cookies[:remember_token]).not_to be_empty
     end
@@ -63,7 +63,7 @@ describe 'Users login' do
 
   context 'login without remembering' do
     it 'unsets remember token cookie' do
-      user = create(:user)
+      user = create(:user, :activated)
 
       # Log in once to set the cookie
       log_in_as user, remember_me: '1'
