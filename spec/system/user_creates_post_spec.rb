@@ -10,7 +10,7 @@ describe 'New post creation' do
 
   context 'logged in' do
     it 'shows new post button' do
-      user = create(:user)
+      user = create(:user, :activated)
       visit login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
@@ -21,7 +21,7 @@ describe 'New post creation' do
     end
 
     it 'allows new posts to be created' do
-      user = create(:user)
+      user = create(:user, :activated)
       post = build(:link_post)
       visit login_path
       fill_in 'Email', with: user.email

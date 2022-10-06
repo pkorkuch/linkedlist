@@ -5,7 +5,7 @@ describe 'static pages' do
 
   context 'logged in' do
     it 'redirects root to profile of current user' do
-      user = create(:user)
+      user = create(:user, :activated)
       log_in_as user
       get root_path
       assert_redirected_to user_url(user)

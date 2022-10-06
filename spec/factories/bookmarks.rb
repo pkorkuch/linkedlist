@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :bookmark do
-    user
+    association :user, :activated
     link_post
   end
 end

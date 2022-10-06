@@ -22,10 +22,7 @@ describe 'Users signup' do
       post users_path, params: { user: new_user }
     end
     follow_redirect!
-    assert_select 'h2, h3', new_user[:name]
-    assert_select 'div[role="alert"]', count: 1
-    assert_select 'div[role="alert"] li', count: 1
     assert_not flash.empty?
-    assert is_logged_in?
+    assert_not is_logged_in?
   end
 end

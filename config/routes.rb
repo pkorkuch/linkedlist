@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :users do
     resources :link_posts, path: 'posts', shallow: true
     resources :bookmarks, only: :index
+    collection do
+      get 'activate/:activation_token', to: 'users#activate', as: :activate
+    end
   end
   resources :bookmarks, only: %i[create destroy]
 end

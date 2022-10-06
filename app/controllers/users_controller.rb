@@ -23,9 +23,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = 'Successfully signed up'
-      redirect_to @user
+      flash[:success] = 'Successfully signed up. Check your email for a link to activate your account.'
+      UserMailer.with(user: @user).account_activation.deliver_later
+      redirect_to root_url
     else
       render 'new', status: :unprocessable_entity
     end
@@ -47,6 +47,17 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = 'User deleted'
     redirect_to users_url
+  end
+
+  def activate
+    @user = User.activate(params[:activation_token])
+    if @user
+      flash[:success] = 'Successfully activated.'
+      redirect_to login_url
+    else
+      flash[:error] = 'Unable to activate user.'
+      redirect_to root_url
+    end
   end
 
   private

@@ -1,0 +1,18 @@
+<mjml>
+  <mj-body>
+    <mj-section background-color="#3F3F46">
+      <mj-column>
+        <mj-text padding-bottom="0px" font-size="14px" color="#F5F5F5" font-family="Trebuchet MS"><span style="font-family: 'Georgia', serif">linked</span>List</mj-text>
+        <mj-text padding-top="8px" font-size="32px" color="#F5F5F5" font-family="Georgia">Activate Account</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#3F3F46">
+      <mj-column>
+        <mj-text font-size="16px" line-height="19px" color="#F5F5F5" font-family="Trebuchet MS">Thank you for signing up. Click the link below to activate your account.</mj-text>
+        <mj-text font-size="12px" line-height="14px" color="#FDE047" font-family="Trebuchet MS"><mj-raw><!-- htmlmin:ignore --><%= link_to nil, activate_users_url(@user.activation_token) %><!-- htmlmin:ignore --></mj-raw></mj-text>
+        <mj-text font-size="14px" line-height="19px" color="#F5F5F5" font-family="Trebuchet MS">This link will expire in 24 hours.</mj-text>
+        <mj-text font-size="14px" line-height="19px" color="#F5F5F5" font-family="Trebuchet MS">If you did not sign up for an account, you can ignore this email. The new account will be deleted if it's not activated within 7 days.</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

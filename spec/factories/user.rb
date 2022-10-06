@@ -7,9 +7,14 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { generate(:email) }
     password { 'password' }
+    created_at { Time.now }
 
     trait :admin do
       admin { true }
+    end
+
+    trait :activated do
+      activated_at { created_at + Random.new.rand(1..1000).minutes }
     end
   end
 end

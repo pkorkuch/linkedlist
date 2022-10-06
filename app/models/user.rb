@@ -30,6 +30,38 @@ class User < ApplicationRecord
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
+  def activated?
+    return false if activated_at.nil?
+
+    true
+  end
+
+  def activation_token
+    to_signed_global_id(expires_in: 24.hours, for: 'account_activation')
+  end
+
+  def activate(activation_token)
+    return self unless activated_at.nil?
+
+    user = GlobalID::Locator.locate_signed(activation_token, for: 'account_activation')
+
+    return nil if user.nil?
+    return nil unless user.is_a?(User)
+    return nil unless user == self
+
+    update_attribute(:activated_at, Time.now)
+
+    self
+  end
+
+  def self.activate(activation_token)
+    user = GlobalID::Locator.locate_signed(activation_token, for: 'account_activation')
+    return nil if user.nil?
+    return nil unless user.is_a?(User)
+
+    user.activate(activation_token)
+  end
+
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 

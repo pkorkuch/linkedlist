@@ -1,0 +1,8 @@
+linkedList
+Activate Account
+
+Thank you for signing up. Click the link below to activate your account.
+<%= link_to nil, activate_users_url(@user.activation_token) %>
+
+This link will expire in 24 hours.
+If you did not sign up for an account, you can ignore this email. The new account will be deleted if it's not activated within 7 days.
