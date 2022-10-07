@@ -1,0 +1,57 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.8.0
+  browser-tools: circleci/browser-tools@1.4.0
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0.0-browsers
+    steps:
+      - checkout
+      - ruby/install-deps
+
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:3.0.0-browsers
+      - image: cimg/postgres:14.5
+        environment:
+          POSTGRES_USER: linkedlist_test
+          POSTGRES_DB: linkedlist
+          POSTGRES_PASSWORD: ""
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: linkedlist_test
+      PGPASSWORD: ""
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - ruby/install-deps
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database creation
+          command: bundle exec rails db:create --trace
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      - run:
+          name: RSpec Tests
+          command: bundle exec rails spec --trace
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
