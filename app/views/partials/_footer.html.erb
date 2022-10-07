@@ -7,8 +7,10 @@
       <li><%= link_to "Help", help_path, class: "no-underline hover:underline focus:underline" %></li>
       <li><%= link_to "Sign Up", signup_path, class: "no-underline hover:underline focus:underline" %></li>
     </ul>
-    <div class="w-full mt-2 p-2 text-xs border rounded-md overflow-scroll" >
-      <%= debug(params) if Rails.env.development? %>
-    </div>
+    <% if Rails.env.development? %>
+      <div class="w-full mt-2 p-2 text-xs border rounded-md overflow-scroll" >
+        <%= debug(params) %>
+      </div>
+    <% end %>
   </div>
 </footer>
