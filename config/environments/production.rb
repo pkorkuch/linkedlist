@@ -73,9 +73,9 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
-    from: 'noreply@korkuch.dev'
+    from: 'noreply@linkedlist.korkuch.dev'
   }
-  config.action_mailer.default_url_options = { host: 'korkuch.dev', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'linkedlist.korkuch.dev', protocol: 'https' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
