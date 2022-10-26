@@ -7,6 +7,8 @@ gem 'rails', '~> 7.0'
 
 gem 'bcrypt', '~> 3.1'
 gem 'bootsnap', '~> 1.10', require: false
+gem 'faraday', '~> 2.6'
+gem 'faraday-net_http', '~> 3.0'
 gem 'importmap-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.11'
 gem 'pg', '~> 1.3'
