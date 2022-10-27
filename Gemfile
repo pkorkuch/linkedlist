@@ -5,6 +5,7 @@ ruby '3.0'
 
 gem 'rails', '~> 7.0'
 
+gem 'activerecord-session_store', '~> 2.0'
 gem 'bcrypt', '~> 3.1'
 gem 'bootsnap', '~> 1.10', require: false
 gem 'faraday', '~> 2.6'
