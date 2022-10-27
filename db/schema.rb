@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_010815) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_10_27_000753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -19,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_03_18_010815) do
   create_table "bookmarks", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "link_post_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["link_post_id"], name: "index_bookmarks_on_link_post_id"
     t.index ["user_id", "link_post_id"], name: "index_bookmarks_on_user_id_and_link_post_id", unique: true
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
@@ -31,21 +30,30 @@ ActiveRecord::Schema.define(version: 2022_03_18_010815) do
     t.text "content"
     t.text "link"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id", "created_at"], name: "index_link_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_link_posts_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.citext "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
-    t.datetime "activated_at", precision: 6
+    t.datetime "activated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
